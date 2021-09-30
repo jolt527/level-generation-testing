@@ -10,7 +10,7 @@ public class LevelGeneration : MonoBehaviour {
     public Vector3 worldLoadPoint;
     public GameObject[] levelPrefabs;
 
-    private const float PIECE_LENGTH = 10f;
+    private const float PIECE_LENGTH = 4f;
     private const string NEW_SCENE_NAME = "new scene";
     private const string RELATIVE_LEVEL_FILE_PATH = "/test.level";
 
