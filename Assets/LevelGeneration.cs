@@ -58,44 +58,11 @@ public class LevelGeneration : MonoBehaviour {
                     continue;
                 }
 
-                bool hasLeftWall = j == 0 || wallData[i, j - 1] == 1;
-                bool hasRightWall = j == columns - 1 || wallData[i, j + 1] == 1;
-                bool hasUpWall = i == 0 || wallData[i - 1, j] == 1;
-                bool hasDownWall = i == rows - 1 || wallData[i + 1, j] == 1;
-
-                // shitty prefab index determination
-                int prefabIndex = 0;
-                if (!hasLeftWall && !hasRightWall && !hasUpWall && hasDownWall) {
-                    prefabIndex = 1;
-                } else if (hasLeftWall && !hasRightWall && !hasUpWall && !hasDownWall) {
-                    prefabIndex = 2;
-                } else if (!hasLeftWall && !hasRightWall && hasUpWall && !hasDownWall) {
-                    prefabIndex = 3;
-                } else if (!hasLeftWall && hasRightWall && !hasUpWall && !hasDownWall) {
-                    prefabIndex = 4;
-                } else if (hasLeftWall && !hasRightWall && !hasUpWall && hasDownWall) {
-                    prefabIndex = 5;
-                } else if (hasLeftWall && !hasRightWall && hasUpWall && !hasDownWall) {
-                    prefabIndex = 6;
-                } else if (!hasLeftWall && hasRightWall && hasUpWall && !hasDownWall) {
-                    prefabIndex = 7;
-                } else if (!hasLeftWall && hasRightWall && !hasUpWall && hasDownWall) {
-                    prefabIndex = 8;
-                } else if (!hasLeftWall && !hasRightWall && hasUpWall && hasDownWall) {
-                    prefabIndex = 9;
-                } else if (hasLeftWall && hasRightWall && !hasUpWall && !hasDownWall) {
-                    prefabIndex = 10;
-                } else if (hasLeftWall && hasRightWall && hasUpWall && !hasDownWall) {
-                    prefabIndex = 11;
-                } else if (!hasLeftWall && hasRightWall && hasUpWall && hasDownWall) {
-                    prefabIndex = 12;
-                } else if (hasLeftWall && hasRightWall && !hasUpWall && hasDownWall) {
-                    prefabIndex = 13;
-                } else if (hasLeftWall && !hasRightWall && hasUpWall && hasDownWall) {
-                    prefabIndex = 14;
-                } else if (hasLeftWall && hasRightWall && hasUpWall && hasDownWall) {
-                    prefabIndex = 15;
-                }
+                int hasLeftWall = j == 0 || wallData[i, j - 1] == 1 ? 1 : 0;
+                int hasRightWall = j == columns - 1 || wallData[i, j + 1] == 1 ? 1 : 0;
+                int hasUpWall = i == 0 || wallData[i - 1, j] == 1 ? 1 : 0;
+                int hasDownWall = i == rows - 1 || wallData[i + 1, j] == 1 ? 1 : 0;
+                int prefabIndex = (hasLeftWall << 3) | (hasRightWall << 2) | (hasUpWall << 1) | hasDownWall;
 
                 data[i,j] = prefabIndex;
             }
